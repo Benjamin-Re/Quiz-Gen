@@ -1,0 +1,6 @@
+5, Which of the following is likely to benefit most from the use of test tools providing test capture and replay facilities?,
+Regression testing, Integration testing, System testing, User acceptance testing, a,
+6, Which of the following statements is NOT correct?, a) A minimal test set that achieves 100% LCSAJ coverage will also achieve 100% branch coverage.,
+A minimal test set that achieves 100% path coverage will also achieve 100% statement coverage.,
+ A minimal test set that achieves 100% path coverage will generally detect more faults than one that achieves 100% statement coverage.,
+ A minimal test set that achieves 100% statement coverage will generally detect more faults than one that achieves 100% branch coverage.,
