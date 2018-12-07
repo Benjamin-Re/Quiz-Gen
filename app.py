@@ -6,6 +6,7 @@ from flask import Flask, render_template, jsonify, json
 
 # create app object
 app = Flask(__name__)
+# json = FlaskJSON(app)		notwendig?
 
 # Connect to db
 connection = sqlite3.connect("questions.db")
@@ -14,14 +15,21 @@ connection = sqlite3.connect("questions.db")
 crsr = connection.cursor()
 
 # Execute a statement
-crsr.execute("SELECT * FROM quest WHERE id = 1;")
+myResult = crsr.execute("SELECT * FROM quest WHERE id = 1;")
 
 # store fetched data in variable
-myResult = crsr.fetchall()
-print(myResult)
+# myResult = crsr.fetchall()
+#print(myResult)
+
+items = []
+# (hardcoded) solution to get description along with result
+for row in myResult:
+	items.append({'Index': row[0], 'q': row[1], 'a': row[2], 'b': row[3], 'c': row[4], 'd': row[5], 'ans': row[6], 'id': row[7]})
+print(items)
+
 
 # convert into JSON:
-myJson = json.dumps(myResult)
+myJson = json.dumps(items[0])
 print(myJson)
 
 # route to index
