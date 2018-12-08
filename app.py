@@ -53,5 +53,5 @@ connection.close()
 ## http://127.0.0.1:5000
 
 # Offene Tasks
-## Gegebene Antworten prüfen
+## Punkte für Fragen sammeln
 ## Weitere Fragen in die DB importieren (wie ist das passiert ?)
