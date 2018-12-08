@@ -1,6 +1,4 @@
 $(document).ready(function () {
-	
-
 
 	document.getElementById("a").innerHTML = "CHANGE";
 	document.getElementById("quest").innerHTML = "Hello World!";
