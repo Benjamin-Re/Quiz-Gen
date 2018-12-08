@@ -14,7 +14,7 @@ for row in myResult:
 	items.append({'Index': row[0], 'q': row[1], 'a': row[2], 'b': row[3], 'c': row[4], 'd': row[5], 'ans': row[6], 'id': row[7]})
 
 
-# Request-Handler --> Alle Anfragen gehen derzeit über die Root
+# Request-Handler --> Alle Anfragen gehen derzeit über die Root 
 @app.route("/")
 def index():
     currentQuestion = request.args.get('cq', 0, type=int)
