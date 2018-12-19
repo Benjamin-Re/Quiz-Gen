@@ -1,7 +1,9 @@
 import sqlite3  # Import sql
 from flask import Flask, render_template, request
 
+
 app = Flask(__name__)  # create app object
+
 
 # Database: Read Data
 connection = sqlite3.connect("questions.db")  # Connect to db
@@ -14,26 +16,41 @@ for row in myResult:
     items.append(
         {'Index': row[0], 'q': row[1], 'a': row[2], 'b': row[3], 'c': row[4], 'd': row[5], 'ans': row[6], 'id': row[7]})
 
+# Zählt die richtigen Antworten
+count = 0
 
 # Request-Handler --> Alle Anfragen gehen derzeit über die Root
 @app.route("/")
 def index():
+    global count
+    count = 0
+    return render_template('index.html')
+
+
+@app.route("/quiz")
+def quiz():
     # get arguments
     cq = request.args.get('cq', 0, type=int)  # current question
     pq = request.args.get('pq', -1, type=int)  # previous question
     pq_answer = request.args.get('answer', None, type=str)  # previous question
+    global count
 
     # check if answer to previous question was correct
     pq_correct = -1
     if 0 <= pq < len(items):
-        pq_correct = 1 if pq_answer == items[pq]['ans'] else 0
+        if pq_answer == items[pq]['ans']:
+            pq_correct = 1
+            count += 1
+
+    else:
+        pq_correct = 0
 
     # check if the currently requested question does exist
     if 0 <= cq < len(items):
         nextQuestion = -1 if cq + 1 >= len(items) else cq + 1
-        return render_template('index.html', cq=cq, myVariable=items[cq], nq=nextQuestion, pq_correct=pq_correct, pq = pq)
+        return render_template('quiz.html', cq=cq, myVariable=items[cq], nq=nextQuestion, pq_correct=pq_correct, pq = pq, count = count, answerVar = items[cq]['ans'])
     elif cq == -1:
-        return render_template('index.html', cq=cq, myVariable=None, nq=None, pq_correct=pq_correct, pq=pq)
+        return render_template('quiz.html', cq=cq, myVariable=None, nq=None, pq_correct=pq_correct, pq=pq, count = count, answerVar = items[cq]['ans'])
     else:
         return "Question doesn't exist"
 
@@ -53,5 +70,5 @@ connection.close()
 ## http://127.0.0.1:5000
 
 # Offene Tasks
-## Punkte für Fragen sammeln
-## Weitere Fragen in die DB importieren (wie ist das passiert ?)
+## Layout anpassen
+## Animationen hinzufügen

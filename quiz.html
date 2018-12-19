@@ -1,7 +1,8 @@
 <DOCTYPE! HTML>
 <html lang="en">
 <head>
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src=".\static\script.js"></script>
 <title>Quiz Generator</title>
 </head>
 <body>
@@ -9,16 +10,16 @@
         <h3>Great, all questions where answered.</h3>
     {% else %}
         <h3>Question number {{ cq+1 }}:</h3>
-        <p id="quest">{{ myVariable.q }}</p>
+        <p id="quest">{{ myVariable.q }}</p> <!-- das ist die Frage, also myVariable ist =items[cq] -->
         <form action="/" method="GET">
             <input type="radio" name="answer" value="a">{{ myVariable.a }}</input></br>
             <input type="radio" name="answer" value="b">{{ myVariable.b }}</input></br>
             <input type="radio" name="answer" value="c">{{ myVariable.c }}</input></br>
             <input type="radio" name="answer" value="d">{{ myVariable.d }}</input></p>
-            <input type="hidden" name="cq" value="{{ nq }}"/>
-            <input type="hidden" name="pq" value="{{ cq }}"/>
+            <input type="hidden" name="cq" value="{{ nq }}"/> <!-- nq ist die cq + 1 -->
+            <input type="hidden" name="pq" value="{{ cq }}"/> <!-- pq ist previous question -->
             <br/>
-            <input type="submit" value="Check & goto next question">
+            <input type="submit" value="Check & goto next question" id="button"> <!-- das ist der submit button -->
         </form>
     {% endif %}
 
@@ -29,16 +30,13 @@
     {% endif %}
 
     {% if pq_correct == 1 %}
-        <p>TOP! Your previous Answer was correct.</p>
+        <p id="correct">TOP! Your previous Answer was correct.</p>
     {% elif pq_correct == 0 %}
         <p>Sorry! Your previous Answer was <b>not</b> correct.
         <a href="?cq={{ pq }}">Try again (goto previous question)</a>
         </p>
     {% endif %}
+    <a href=" {{ url_for('index') }}>Go Back</a>
+
 </body>
 </html>
-=======
-{% extends "layout.html" %}
-{% block body %}
-    <a href="{{ url_for('quiz') }}">Take Quiz</a>
-{% endblock %}

@@ -1,16 +1,13 @@
-<DOCTYPE! HTML>
-<html lang="en">
-<head>
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
-<title>Quiz Generator</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block body %}
+
     {% if cq == -1 %}
         <h3>Great, all questions where answered.</h3>
+        <a href=" {{ url_for('index') }} ">Go back.</a>
     {% else %}
         <h3>Question number {{ cq+1 }}:</h3>
         <p id="quest">{{ myVariable.q }}</p>
-        <form action="/" method="GET">
+        <form action="/quiz" method="GET">
             <input type="radio" name="answer" value="a">{{ myVariable.a }}</input></br>
             <input type="radio" name="answer" value="b">{{ myVariable.b }}</input></br>
             <input type="radio" name="answer" value="c">{{ myVariable.c }}</input></br>
@@ -20,6 +17,7 @@
             <br/>
             <input type="submit" value="Check & goto next question">
         </form>
+    <button type="button" onclick="clicked()">My Button</button>
     {% endif %}
 
     <br/><br/>
@@ -27,18 +25,36 @@
     {% if pq_correct >= 0 %}
     <h3>Check of your previous answer:</h3>
     {% endif %}
-
-    {% if pq_correct == 1 %}
+        {% if pq_correct == 1 %}
         <p>TOP! Your previous Answer was correct.</p>
     {% elif pq_correct == 0 %}
         <p>Sorry! Your previous Answer was <b>not</b> correct.
         <a href="?cq={{ pq }}">Try again (goto previous question)</a>
         </p>
     {% endif %}
-</body>
-</html>
-=======
-{% extends "layout.html" %}
-{% block body %}
-    <a href="{{ url_for('quiz') }}">Take Quiz</a>
+    <p> Correct answers: {{ count }}</p>
+
+    <script>
+        window.onload = function() {
+            var rightAnswer = '{{ answerVar }}';
+            console.log(rightAnswer);
+            elements = document.getElementsByTagName("input");
+            console.log(elements[0].innerHTML);  // blank
+            elements[0].innerHTML = "Test";  // doesn't appear
+
+            var results = [];
+            for(var x = 0; x < elements.length; x++)
+                if(elements[x].value == rightAnswer)
+                    results.push(elements[x]);
+            console.log(results);
+        };
+
+        function clicked(rightAnswer){
+            // set correct answer green (Wow what an incredulous project)
+            // results[0].innerHTML.style.color = "green"; // console - "results not defined"
+            alert('It should work, why doesn\'t it work?');
+
+        };
+    </script>
 {% endblock %}
+
