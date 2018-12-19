@@ -1,22 +1,4 @@
-<DOCTYPE! HTML>
-<html>
-	<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<title>Quiz Generator</title>
-	</head>
-	<body>
-	
-		<p id="quest">question</p>
-		<form action="/action_page"> <!-- This goes to app.py -->
-			<input type="radio" name="answer" value="a"><p id="a">a</p>
-			<input type="radio" name="answer" value="b"><p id="b">b</p>
-			<input type="radio" name="answer" value="c"><p id="c">c</p>
-			<input type="radio" name="answer" value="d"><p id="d">d</p>
-			<input type="submit">
-		</form>
-		<button id="next">next question</button>
-		<!-- {{ myVariable }} -->
-		
-		<script src="../static/script.js"></script>
-	</body>
-</html>
+{% extends "layout.html" %}
+{% block body %}
+    <a href="{{ url_for('quiz') }}">Take Quiz</a>
+{% endblock %}
