@@ -4,3 +4,12 @@
     background-color: #F0F8FF;
     font-color: black;
 }
+
+.action {
+    font-size: 14px;
+    color: green;
+}
+
+.test {
+    font-size: 40px;
+}

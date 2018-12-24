@@ -1,23 +1,24 @@
 {% extends "layout.html" %}
 {% block body %}
-
+{{js|safe}}
     {% if cq == -1 %}
         <h3>Great, all questions where answered.</h3>
         <a href=" {{ url_for('index') }} ">Go back.</a>
     {% else %}
-        <h3>Question number {{ cq+1 }}:</h3>
+        <h3 id="test">Question number {{ cq+1 }}:</h3>
         <p id="quest">{{ myVariable.q }}</p>
         <form action="/quiz" method="GET">
-            <input type="radio" name="answer" value="a">{{ myVariable.a }}</input></br>
-            <input type="radio" name="answer" value="b">{{ myVariable.b }}</input></br>
-            <input type="radio" name="answer" value="c">{{ myVariable.c }}</input></br>
-            <input type="radio" name="answer" value="d">{{ myVariable.d }}</input></p>
+            <label> <input type="radio" name="answer" value="a"> {{ myVariable.a }} </label><br>
+            <label> <input type="radio" name="answer" value="b"> {{ myVariable.b }} </label><br>
+            <label> <input type="radio" name="answer" value="c"> {{ myVariable.c }} </label><br>
+            <label> <input type="radio" name="answer" value="d"> {{ myVariable.d }} </label><br>
             <input type="hidden" name="cq" value="{{ nq }}"/>
             <input type="hidden" name="pq" value="{{ cq }}"/>
             <br/>
-            <input type="submit" value="Check & goto next question">
+            <button type="button" onclick="clicked()">Check</button>
+            <input type="submit" value="Goto next question">
         </form>
-    <button type="button" onclick="clicked()">My Button</button>
+
     {% endif %}
 
     <br/><br/>
@@ -35,26 +36,32 @@
     <p> Correct answers: {{ count }}</p>
 
     <script>
-        window.onload = function() {
-            var rightAnswer = '{{ answerVar }}';
-            console.log(rightAnswer);
-            elements = document.getElementsByTagName("input");
-            console.log(elements[0].innerHTML);  // blank
-            elements[0].innerHTML = "Test";  // doesn't appear
+        // the correct answer input
+        var results = [];
 
-            var results = [];
+        // start when ready
+        window.onload = function() {
+
+            // Store Flask variable in rightAnswer
+            var rightAnswer = '{{ answerVar }}';
+            console.log("Right answer = " + rightAnswer);
+
+            // Select all input elements
+            elements = document.getElementsByTagName("input");
+
+            // Find the correct input-label and save in results
             for(var x = 0; x < elements.length; x++)
                 if(elements[x].value == rightAnswer)
                     results.push(elements[x]);
-            console.log(results);
         };
 
+        // Function for check-button
         function clicked(rightAnswer){
-            // set correct answer green (Wow what an incredulous project)
-            // results[0].innerHTML.style.color = "green"; // console - "results not defined"
-            alert('It should work, why doesn\'t it work?');
+                results[0].parentNode.classList.add("action");
 
-        };
+         };
+
+
     </script>
 {% endblock %}
 
