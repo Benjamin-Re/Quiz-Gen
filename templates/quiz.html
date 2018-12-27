@@ -15,8 +15,8 @@
             <input type="hidden" name="cq" value="{{ nq }}"/>
             <input type="hidden" name="pq" value="{{ cq }}"/>
             <br/>
-            <button type="button" onclick="clicked()">Check</button>
-            <input type="submit" value="Goto next question">
+            <button type="button" onclick="clicked()" id="checkButton">Check</button>
+            <input type="submit" value="Goto next question" id="nextButton">
         </form>
 
     {% endif %}
@@ -24,15 +24,16 @@
     <br/><br/>
 
     {% if pq_correct >= 0 %}
-    <h3>Check of your previous answer:</h3>
-    {% endif %}
+        <h3>Check of your previous answer:</h3>
         {% if pq_correct == 1 %}
-        <p>TOP! Your previous Answer was correct.</p>
-    {% elif pq_correct == 0 %}
+        <p>TOP! Your previous answer was correct.</p>
+        {% elif pq_correct == 0 %}
         <p>Sorry! Your previous Answer was <b>not</b> correct.
         <a href="?cq={{ pq }}">Try again (goto previous question)</a>
         </p>
+        {% endif %}
     {% endif %}
+
     <p> Correct answers: {{ count }}</p>
 
     <script>
@@ -58,7 +59,8 @@
         // Function for check-button
         function clicked(rightAnswer){
                 results[0].parentNode.classList.add("action");
-
+                document.getElementById('checkButton').style.display = 'none';
+                document.getElementById('nextButton').style.display = 'block';
          };
 
 

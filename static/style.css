@@ -1,8 +1,9 @@
 .page {
     margin: 0 auto;
-    width: 500px;
+    width: 800px;
     background-color: #F0F8FF;
     font-color: black;
+    font-family: 'Roboto', sans-serif;
 }
 
 .action {
@@ -12,4 +13,46 @@
 
 .test {
     font-size: 40px;
+}
+
+#checkButton {
+    display: block;
+    background-color: #4ef18f;
+    color: white;
+    border-radius:2em;
+    padding:0.3em 1.2em;
+    margin:0 0.1em 0.1em 0;
+    border:0.16em solid rgba(255,255,255,0);
+    box-sizing: border-box;
+    Text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    Font-weight:300;
+    text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+    text-align:center;
+    transition: all 0.2s;
+}
+
+#checkButton:hover {
+    border-color: rgba(255,255,255,1);
+}
+
+#nextButton {
+    display: none;
+    background-color: #4ef18f;
+    color: white;
+    border-radius:2em;
+    padding:0.3em 1.2em;
+    margin:0 0.1em 0.1em 0;
+    border:0.16em solid rgba(255,255,255,0);
+    box-sizing: border-box;
+    Text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    Font-weight:300;
+    text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+    text-align:center;
+    transition: all 0.2s;
+}
+
+#nextButton:hover {
+    border-color: rgba(255,255,255,1);
 }

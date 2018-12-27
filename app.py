@@ -41,9 +41,8 @@ def quiz():
         if pq_answer == items[pq]['ans']:
             pq_correct = 1
             count += 1
-
-    else:
-        pq_correct = 0
+        else:
+            pq_correct = 0
 
     # check if the currently requested question does exist
     if 0 <= cq < len(items):
